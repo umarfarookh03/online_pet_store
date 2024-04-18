@@ -1,0 +1,79 @@
+<div class="container-fluid m-5">
+  <div class="row justify-content-center">
+    <div *ngIf="cartItems.length > 0">cart items list</div>
+    <div class="col-8">
+      <table class="table table-border table-striped">
+        <thead class="table-dark">
+          <tr>
+            <th>Sno.</th>
+            <th>Image</th>
+            <th>Details</th>
+            <th>Quantity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cartItem of cartItems; index as i">
+            <td>{{ i + 1 }}</td>
+            <td>
+              <img
+                [src]="cartItem.imageUrl"
+                [alt]="cartItem.imageUrl"
+                width="150px"
+                class="img-responsive"
+              />
+            </td>
+            <td>
+              <p>{{ cartItem.name }}</p>
+              <p>{{ cartItem.unitPrice | currency : "INR" }}</p>
+            </td>
+            <td>
+              <div class="row">
+                <div class="col-4">
+                  <button
+                    class="btn btn-primary btn-sm"
+                    (click)="incrementQuantity(cartItem)"
+                  >
+                    +
+                  </button>
+                  {{ cartItem.quantity }}
+                  <button
+                    class="btn btn-primary btn-sm"
+                    (click)="decrementQuantity(cartItem)"
+                  >
+                    -
+                  </button>
+                </div>
+              </div>
+              <p>
+                SubTotal:{{
+                  cartItem.quantity * cartItem.unitPrice | currency : "INR"
+                }}
+              </p>
+              <p>
+                <button
+                  (click)="remove(cartItem)"
+                  class="btn btn-danger btn-sm"
+                >
+                  REMOVE
+                </button>
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="4" style="text-align-last: right; font-weight: 100">
+              <p>Total Quantity:{{ totalQuantity }}</p>
+              <p>Total Price:{{ totalPrice | currency : "INR" }}</p>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="4" style="text-align-last: right; font-weight: bold">
+              <p>Total Quantity:{{ totalQuantity }}</p>
+              <p>Total Price:{{ totalPrice | currency : "INR" }}</p>
+              <a routerLink="/checkout" class="btn btn-info">CheckOut</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

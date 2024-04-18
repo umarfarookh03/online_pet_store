@@ -1,0 +1,15 @@
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-4">
+      <img [src]="product.imageUrl" alt="" width="200px" />
+    </div>
+    <div class="col-4">
+      <h3>{{ product.name }}</h3>
+      <p>{{ product.unitPrice | currency : "INR" }}</p>
+      <p>{{ product.description }}</p>
+      <button (click)="addToCart()" class="btn btn-primary btn-sm">
+        Add To Cart
+      </button>
+    </div>
+  </div>
+</div>
